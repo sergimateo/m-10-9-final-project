@@ -1,56 +1,93 @@
 <template>
   <v-app>
-    <v-app-bar app color="primary" dark>
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
+    <v-card>
+      <v-app-bar color="teal darken-3" app dense dark>
+        <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
 
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
+        <v-toolbar-title
+          ><router-link to="/" tag="span" style="cursor: pointer">
+            Title
+          </router-link></v-toolbar-title
+        >
+      </v-app-bar>
 
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
+      <v-navigation-drawer
+        v-model="drawer"
+        app
+        dark
+        color="teal darken-1"
+        temporary
       >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
+        <v-list nav dense>
+          <v-list-item-group
+            v-model="group"
+            active-class="teal darken-1--text text--accent-4"
+          >
+            <v-list-item
+              v-for="item in navDrawerItems"
+              :key="item.id"
+              :to="item.to"
+            >
+              <v-list-item-icon>
+                <v-icon>{{ item.icon }}</v-icon>
+              </v-list-item-icon>
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
+            </v-list-item>
+            <!-- 
+            <v-list-item to="/users">
+              <v-list-item-icon>
+                <v-icon>mdi-account-group</v-icon>
+              </v-list-item-icon>
+              <v-list-item-title>Users</v-list-item-title>
+            </v-list-item>
+            <v-list-item to="/pictures">
+              <v-list-item-icon>
+                <v-icon>mdi-image-multiple</v-icon>
+              </v-list-item-icon>
+              <v-list-item-title>Pictures</v-list-item-title>
+            </v-list-item>
 
-    <v-main>
-      <HelloWorld />
-    </v-main>
+            <v-list-item to="/about">
+              <v-list-item-icon>
+                <v-icon>mdi-information</v-icon>
+              </v-list-item-icon>
+              <v-list-item-title to="/about">About</v-list-item-title>
+            </v-list-item> -->
+          </v-list-item-group>
+        </v-list>
+      </v-navigation-drawer>
+
+      <!-- Sizes your content based upon application components -->
+      <v-main app>
+        <!-- Provides the application the proper gutter -->
+        <v-container fluid>
+          <!-- If using vue-router -->
+          <router-view></router-view>
+        </v-container>
+      </v-main>
+
+      <v-footer app> The footer </v-footer>
+    </v-card>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld";
+// import HelloWorld from "./components/HelloWorld";
+import { mapState } from "vuex";
 
 export default {
   name: "App",
-
-  components: {
-    HelloWorld,
+  computed: {
+    ...mapState({
+      navDrawerItems: (state) => state.navDrawerItems,
+    }),
   },
 
+  components: {},
+
   data: () => ({
-    //
+    drawer: false,
+    group: null,
   }),
 };
 </script>
