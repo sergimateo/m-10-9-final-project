@@ -1,6 +1,6 @@
 <template>
   <v-container fluid class="pictures">
-    <v-row justify="space-around" class="pb-4"
+    <!-- <v-row justify="space-around" class="pb-4"
       ><h1>This is the albums page</h1></v-row
     >
     <div class="text-center pb-8">
@@ -10,7 +10,9 @@
           >mdi-arrow-left-thin-circle-outline</v-icon
         ></v-btn
       >
-    </div>
+    </div> -->
+
+    <MainHeader :title="title"></MainHeader>
     <v-row justify="center">
       <v-col v-for="item in albums" :key="item.id" cols="auto">
         <v-card
@@ -44,14 +46,22 @@
 </style>
 <script>
 import { mapState } from "vuex";
+import MainHeader from "./../components/MainHeader.vue";
+// import Dummy from "./../components/Dummy.vue";
 
 export default {
   name: "Pictures",
+  components: { MainHeader },
 
   computed: {
     ...mapState({
       albums: (state) => state.albums,
     }),
+  },
+  data() {
+    return {
+      title: "Albums",
+    };
   },
 };
 </script>

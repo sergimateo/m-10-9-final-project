@@ -1,16 +1,7 @@
 <template>
   <v-container fluid class="users">
-    <v-row justify="space-around" class="pb-4"
-      ><h1>This is the users page</h1></v-row
-    >
-    <div class="text-center pb-4">
-      <v-btn rounded color="teal darken-2" small dark>
-        Back
-        <v-icon small class="pl-2"
-          >mdi-arrow-left-thin-circle-outline</v-icon
-        ></v-btn
-      >
-    </div>
+    <MainHeader :title="title"></MainHeader>
+
     <v-row justify="center">
       <v-col v-for="item in users" :key="item.id" cols="auto">
         <v-card
@@ -24,7 +15,17 @@
           </v-card-title>
 
           <v-card-actions justify="space-around">
-            <v-btn class="mx-auto" small rounded color="teal" dark>
+            <v-btn
+              :to="{
+                name: 'UserDetails',
+                params: { name: item.name },
+              }"
+              class="mx-auto"
+              small
+              rounded
+              color="teal"
+              dark
+            >
               View details
             </v-btn>
           </v-card-actions>
@@ -52,14 +53,20 @@
 </style>
 <script>
 import { mapState } from "vuex";
+import MainHeader from "./../components/MainHeader.vue";
 
 export default {
   name: "Users",
-
+  components: { MainHeader },
   computed: {
     ...mapState({
       users: (state) => state.users,
     }),
+  },
+  data() {
+    return {
+      title: "Users",
+    };
   },
 };
 </script>

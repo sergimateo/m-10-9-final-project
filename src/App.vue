@@ -5,7 +5,7 @@
 
       <v-toolbar-title
         ><router-link to="/" tag="span" style="cursor: pointer">
-          Vue.js Last Project
+          IT Academy | Vue.js Final Project
         </router-link></v-toolbar-title
       >
     </v-app-bar>
