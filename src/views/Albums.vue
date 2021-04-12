@@ -1,9 +1,9 @@
 <template>
-  <v-container fluid class="users">
+  <v-container fluid class="pictures">
     <v-row justify="space-around" class="pb-4"
-      ><h1>This is the users page</h1></v-row
+      ><h1>This is the albums page</h1></v-row
     >
-    <div class="text-center pb-4">
+    <div class="text-center pb-8">
       <v-btn rounded color="teal darken-2" small dark>
         Back
         <v-icon small class="pl-2"
@@ -12,15 +12,15 @@
       >
     </div>
     <v-row justify="center">
-      <v-col v-for="item in users" :key="item.id" cols="auto">
+      <v-col v-for="item in albums" :key="item.id" cols="auto">
         <v-card
           class="d-flex flex-column mx-auto pb-1 align-content-center"
           elevation="3"
           width="340"
           height="200"
         >
-          <v-card-title class="mx-auto mb-auto user-title"
-            >{{ item.name }}
+          <v-card-title class="mx-auto mb-auto album-title"
+            >{{ item.title }}
           </v-card-title>
 
           <v-card-actions justify="space-around">
@@ -29,21 +29,13 @@
             </v-btn>
           </v-card-actions>
         </v-card>
-        <!-- <v-card class="mx-auto pb-1" elevation="2" width="400" height="100">
-          <v-card-title>{{ item.name }} </v-card-title>
-
-          <v-card-actions>
-            <v-row justify="space-around"
-              ><v-btn small rounded color="teal" dark> View details </v-btn>
-            </v-row>
-          </v-card-actions>
-        </v-card> -->
       </v-col>
     </v-row>
   </v-container>
 </template>
+
 <style scoped>
-.user-title {
+.album-title {
   word-break: normal;
 
   text-align: center;
@@ -54,11 +46,11 @@
 import { mapState } from "vuex";
 
 export default {
-  name: "Users",
+  name: "Pictures",
 
   computed: {
     ...mapState({
-      users: (state) => state.users,
+      albums: (state) => state.albums,
     }),
   },
 };

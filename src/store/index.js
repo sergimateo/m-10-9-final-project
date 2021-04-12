@@ -1,18 +1,22 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import albumsList from "./../assets/albumsList.json";
+import usersList from "./../assets/usersList.json";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    albums: albumsList,
+    users: usersList,
     navDrawerItems: [
       { id: "1", title: "Home", icon: "mdi-home", to: "/" },
       { id: "2", title: "Users", icon: "mdi-account-group", to: "/users" },
       {
         id: "3",
-        title: "Pictures",
+        title: "Albums",
         icon: "mdi-image-multiple",
-        to: "/pictures",
+        to: "/albums",
       },
       { id: "4", title: "About", icon: "mdi-information", to: "/about" },
     ],
