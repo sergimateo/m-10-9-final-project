@@ -1,9 +1,10 @@
 <template>
   <v-container fluid class="users">
-    <MainHeader :title="title"></MainHeader>
+    <MainHeader :headernm="headername"></MainHeader>
 
-    <v-row justify="center">
-      <v-col v-for="item in users" :key="item.id" cols="auto">
+    <!-- <v-row justify="center"> -->
+    <router-view></router-view>
+    <!-- <v-col v-for="item in users" :key="item.id" cols="auto">
         <v-card
           class="d-flex flex-column mx-auto pb-1 align-content-center"
           elevation="3"
@@ -30,7 +31,10 @@
             </v-btn>
           </v-card-actions>
         </v-card>
-        <!-- <v-card class="mx-auto pb-1" elevation="2" width="400" height="100">
+      </v-col> -->
+    <!-- </v-row> -->
+  </v-container>
+  <!-- <v-card class="mx-auto pb-1" elevation="2" width="400" height="100">
           <v-card-title>{{ item.name }} </v-card-title>
 
           <v-card-actions>
@@ -39,9 +43,6 @@
             </v-row>
           </v-card-actions>
         </v-card> -->
-      </v-col>
-    </v-row>
-  </v-container>
 </template>
 <style scoped>
 .user-title {
@@ -65,7 +66,7 @@ export default {
   },
   data() {
     return {
-      title: "Users",
+      headername: "Users",
     };
   },
 };

@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-row justify="space-around" class="pb-4"
-      ><h1>This is the {{ title }} page</h1></v-row
+      ><h1>This is the {{ headernm }} page</h1></v-row
     >
     <div class="text-center pb-8">
       <v-btn rounded color="teal darken-2" small dark>
@@ -17,6 +17,6 @@
 <script>
 export default {
   name: "MainHeader",
-  props: ["title"],
+  props: ["headernm"],
 };
 </script>

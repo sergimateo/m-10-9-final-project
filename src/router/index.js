@@ -13,35 +13,63 @@ const routes = [
   {
     path: "/about",
     name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
+
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
   },
   {
     path: "/users",
-    name: "Users",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
+    // name: "UsersList",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Users.vue"),
+      import(/* webpackChunkName: "users" */ "../views/Users.vue"),
+    children: [
+      {
+        path: "",
+        name: "UsersList",
+        component: () =>
+          import(/* webpackChunkName: "userslist" */ "../views/UsersList.vue"),
+      },
+      {
+        path: ":username",
+        name: "UserDetails",
+        component: () =>
+          import(
+            /* webpackChunkName: "userdetails" */ "../views/UserDetails.vue"
+          ),
+      },
+    ],
   },
-  {
-    path: "/users/:name",
-    name: "UserDetails",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/UserDetails.vue"),
-  },
+
   {
     path: "/albums",
-    name: "Albums",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
+    // // name: "AlbumsList",
+
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Albums.vue"),
+      import(/* webpackChunkName: "albums" */ "../views/Albums.vue"),
+    children: [
+      {
+        path: "",
+        name: "AlbumsList",
+        component: () =>
+          import(
+            /* webpackChunkName: "albumslist" */ "../views/AlbumsList.vue"
+          ),
+      },
+      {
+        path: ":albumtitle",
+        name: "AlbumDetails",
+        component: () =>
+          import(
+            /* webpackChunkName: "albumdetails" */ "../views/AlbumDetails.vue"
+          ),
+      },
+    ],
+  },
+  {
+    path: "/dummy",
+    name: "Dummy",
+    component: () =>
+      import(/* webpackChunkName: "dummylist" */ "../views/DummyList.vue"),
   },
 ];
 

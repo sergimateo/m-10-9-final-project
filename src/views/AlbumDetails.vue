@@ -1,7 +1,7 @@
 <template>
   <div class="pt-3">
     <!-- <MainHeader :title="title"></MainHeader> -->
-    <p>{{ $route.params.username }} user details</p>
+    <p>{{ $route.params.albumtitle }} album details</p>
   </div>
 </template>
 
@@ -10,16 +10,16 @@ import { mapState } from "vuex";
 // import MainHeader from "./../components/MainHeader.vue";
 
 export default {
-  name: "UserDetails",
+  name: "AlbumDetails",
   // components: { MainHeader },
   computed: {
     ...mapState({
-      users: (state) => state.users,
+      users: (state) => state.albums,
     }),
   },
   data() {
     return {
-      title: "User Details",
+      title: "Album Details",
     };
   },
 };
