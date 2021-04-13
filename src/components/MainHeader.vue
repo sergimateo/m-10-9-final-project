@@ -4,7 +4,7 @@
       ><h1>This is the {{ headernm }} page</h1></v-row
     >
     <div class="text-center pb-8">
-      <v-btn rounded color="teal darken-2" small dark>
+      <v-btn @click="$router.go(-1)" rounded color="teal darken-2" small dark>
         Back
         <v-icon small class="pl-2"
           >mdi-arrow-left-thin-circle-outline</v-icon
@@ -18,5 +18,6 @@
 export default {
   name: "MainHeader",
   props: ["headernm"],
+  methods: {},
 };
 </script>

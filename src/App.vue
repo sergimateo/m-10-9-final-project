@@ -8,6 +8,22 @@
           IT Academy | Vue.js Final Project
         </router-link></v-toolbar-title
       >
+      <!-- <v-spacer></v-spacer> -->
+      <!-- <v-toolbar dense floating dark>
+        <v-text-field
+          hide-details
+          prepend-icon="mdi-magnify"
+          single-line
+        ></v-text-field>
+
+        <v-btn icon>
+          <v-icon>mdi-crosshairs-gps</v-icon>
+        </v-btn>
+
+        <v-btn icon>
+          <v-icon>mdi-dots-vertical</v-icon>
+        </v-btn>
+      </v-toolbar> -->
     </v-app-bar>
 
     <v-navigation-drawer

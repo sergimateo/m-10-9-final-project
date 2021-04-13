@@ -1,7 +1,34 @@
 <template>
   <div class="pt-3">
     <!-- <MainHeader :title="title"></MainHeader> -->
-    <p>{{ $route.params.albumtitle }} album details</p>
+    <v-row justify="space-around" class="pb-4"><h2>Album details</h2></v-row>
+    <v-row justify="space-around" class="pb-4"
+      ><h3>{{ $route.params.albumtitle }}</h3></v-row
+    >
+    <v-row justify="center">
+      <v-col v-for="item in pics" :key="item.id" cols="auto">
+        <v-card elevation="3" width="150" height="150">
+          <v-img height="150px" :src="item.thumbnailUrl"> </v-img>
+          <!-- <v-card-title> {{ item.title }} </v-card-title> -->
+          <!-- <v-img :src="item.thumbnailUrl"> </v-img> -->
+          <!-- <v-card-actions justify="space-around">
+            <v-btn
+              :to="{
+                name: 'AlbumDetails',
+                params: { albumtitle: item.title, albumid: item.id },
+              }"
+              class="mx-auto"
+              small
+              rounded
+              color="teal"
+              dark
+            >
+              View details
+            </v-btn>
+          </v-card-actions> -->
+        </v-card>
+      </v-col>
+    </v-row>
   </div>
 </template>
 
@@ -14,9 +41,25 @@ export default {
   // components: { MainHeader },
   computed: {
     ...mapState({
-      users: (state) => state.albums,
+      albums: (state) => state.albums,
+      // pictures: (state) => state.pictures,
     }),
+    ...mapState({
+      pictures: (state) => state.pictures,
+    }),
+
+    album() {
+      return this.albums.find(
+        (album) => album.id === this.$route.params.albumid
+      );
+    },
+    pics() {
+      return this.pictures.filter(
+        (pics) => pics.albumId === this.$route.params.albumid
+      );
+    },
   },
+
   data() {
     return {
       title: "Album Details",
