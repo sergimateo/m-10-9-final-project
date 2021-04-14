@@ -1,6 +1,6 @@
 <template>
   <v-container fluid class="users">
-    <MainHeader :headernm="headername"></MainHeader>
+    <MainHeader :headername="headername"></MainHeader>
 
     <!-- <v-row justify="center"> -->
     <router-view></router-view>

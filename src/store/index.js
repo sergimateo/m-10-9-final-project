@@ -23,6 +23,11 @@ export default new Vuex.Store({
       { id: "4", title: "About", icon: "mdi-information", to: "/about" },
     ],
   },
+  // getters: {
+  //   usernames: (state) => {
+  //     state.users.name
+  //   },
+  // },
   mutations: {},
   actions: {},
   modules: {},

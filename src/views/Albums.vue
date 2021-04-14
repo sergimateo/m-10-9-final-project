@@ -1,6 +1,6 @@
 <template>
   <v-container fluid class="albums">
-    <MainHeader :headernm="headernm"></MainHeader>
+    <MainHeader :headername="headername"></MainHeader>
     <router-view></router-view>
   </v-container>
 </template>
@@ -28,7 +28,7 @@ export default {
   },
   data() {
     return {
-      headernm: "Albums",
+      headername: "Albums",
     };
   },
 };

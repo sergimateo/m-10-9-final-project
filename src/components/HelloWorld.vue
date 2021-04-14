@@ -1,14 +1,7 @@
 <template>
   <v-container height="90vh">
     <v-row class="text-center">
-      <v-col cols="12">
-        <!-- <v-img
-          :src="require('../assets/logo.svg')"
-          class="my-3"
-          contain
-          height="60"
-        /> -->
-      </v-col>
+      <v-col cols="12"> </v-col>
 
       <v-col class="mb-3">
         <h1 class="display-1 font-weight-bold mb-2">
@@ -28,15 +21,30 @@
         <h2 class="headline font-weight-bold mb-3">Las tarjetitas resumen:</h2>
 
         <v-row justify="center">
-          <a
-            v-for="(next, i) in whatsNext"
-            :key="i"
-            :href="next.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            {{ next.text }}
-          </a>
+          <v-col cols="auto">
+            <v-card class="mx-auto" elevation="3" width="340">
+              <v-card-title> Most visited users</v-card-title>
+
+              <!-- <v-card-subtitle> {{ user.email }} </v-card-subtitle> -->
+              <v-divider class="mx-4"></v-divider>
+              <v-card-text class="py-1"> User: Y </v-card-text>
+              <v-card-text class="py-1"> User: Y </v-card-text>
+              <v-card-text class="py-1"> User: Y </v-card-text>
+              <v-card-text class="py-1"> User: Y </v-card-text>
+            </v-card>
+          </v-col>
+          <v-col cols="auto">
+            <v-card class="mx-auto" elevation="3" width="340">
+              <v-card-title> Most visited albums</v-card-title>
+
+              <!-- <v-card-subtitle> {{ user.email }} </v-card-subtitle> -->
+              <v-divider class="mx-4"></v-divider>
+              <v-card-text class="py-1"> Album: X </v-card-text>
+              <v-card-text class="py-1"> Album: X </v-card-text>
+              <v-card-text class="py-1"> Album: X </v-card-text>
+              <v-card-text class="py-1"> Album: X </v-card-text>
+            </v-card>
+          </v-col>
         </v-row>
       </v-col>
     </v-row>
@@ -47,22 +55,6 @@
 export default {
   name: "HelloWorld",
 
-  data: () => ({
-    whatsNext: [
-      {
-        text: "Explore components",
-        href: "https://vuetifyjs.com/components/api-explorer",
-      },
-      {
-        text: "Select a layout",
-        href: "https://vuetifyjs.com/getting-started/pre-made-layouts",
-      },
-      {
-        text: "Frequently Asked Questions",
-        href:
-          "https://vuetifyjs.com/getting-started/frequently-asked-questions",
-      },
-    ],
-  }),
+  data: () => ({}),
 };
 </script>

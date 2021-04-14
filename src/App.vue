@@ -5,10 +5,20 @@
 
       <v-toolbar-title
         ><router-link to="/" tag="span" style="cursor: pointer">
-          IT Academy | Vue.js Final Project
+          Vue.js Final Project
         </router-link></v-toolbar-title
       >
-      <!-- <v-spacer></v-spacer> -->
+      <v-spacer class="mx-auto"></v-spacer>
+      <SearchBar></SearchBar>
+      <!-- <v-autocomplete
+        class="mr-4 ml-16"
+        flat
+        dark
+        hide-details
+        label="Search Users"
+        prepend-inner-icon="mdi-magnify"
+        solo-inverted
+      ></v-autocomplete> -->
       <!-- <v-toolbar dense floating dark>
         <v-text-field
           hide-details
@@ -24,6 +34,7 @@
           <v-icon>mdi-dots-vertical</v-icon>
         </v-btn>
       </v-toolbar> -->
+      <!-- :items="usernames" -->
     </v-app-bar>
 
     <v-navigation-drawer
@@ -68,20 +79,25 @@
 <script>
 // import HelloWorld from "./components/HelloWorld";
 import { mapState } from "vuex";
+import SearchBar from "./components/SearchBar.vue";
 
 export default {
   name: "App",
+  components: { SearchBar },
   computed: {
     ...mapState({
       navDrawerItems: (state) => state.navDrawerItems,
     }),
+    ...mapState({
+      users: (state) => state.users,
+    }),
+    // usernames: this.users.name,
   },
-
-  components: {},
 
   data: () => ({
     drawer: false,
     group: null,
+    // usernames: users.name,
   }),
 };
 </script>
