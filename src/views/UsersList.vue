@@ -42,7 +42,7 @@ import { mapState } from "vuex";
 
 export default {
   name: "UsersList",
-  // components: { MainHeader },
+
   computed: {
     ...mapState({
       users: (state) => state.users,

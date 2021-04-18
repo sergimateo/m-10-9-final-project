@@ -1,25 +1,25 @@
 <template>
   <v-container height="90vh">
     <v-row class="text-center">
-      <v-col cols="12"> </v-col>
+      <!-- <v-col cols="12"> </v-col> -->
 
       <v-col class="mb-3">
         <h1 class="display-1 font-weight-bold mb-2">
-          Welcome to my last Project
+          Welcome to my Vue.js Last Project
         </h1>
 
-        <p class="subheading font-weight-regular">
+        <!-- <p class="subheading font-weight-regular">
           For help and collaboration with other Vuetify developers,
           <br />please join our online
           <a href="https://community.vuetifyjs.com" target="_blank"
             >Discord Community</a
           >
-        </p>
+        </p> -->
       </v-col>
 
       <v-col class="mb-5" cols="12">
         <h2 class="headline font-weight-bold mb-3">Las tarjetitas resumen:</h2>
-
+        <!-- <v-theme-provider root> -->
         <v-row justify="center">
           <v-col cols="auto">
             <v-card class="mx-auto" elevation="3" width="340">
@@ -46,6 +46,7 @@
             </v-card>
           </v-col>
         </v-row>
+        <!-- </v-theme-provider> -->
       </v-col>
     </v-row>
   </v-container>
@@ -53,7 +54,7 @@
 
 <script>
 export default {
-  name: "HelloWorld",
+  name: "MainView",
 
   data: () => ({}),
 };

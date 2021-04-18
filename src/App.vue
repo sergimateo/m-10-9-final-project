@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar color="teal darken-4" app dark>
+    <v-app-bar class="primary" app>
       <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
 
       <v-toolbar-title
@@ -9,45 +9,20 @@
         </router-link></v-toolbar-title
       >
       <v-spacer class="mx-auto"></v-spacer>
-      <SearchBar></SearchBar>
-      <!-- <v-autocomplete
-        class="mr-4 ml-16"
-        flat
-        dark
-        hide-details
-        label="Search Users"
-        prepend-inner-icon="mdi-magnify"
-        solo-inverted
-      ></v-autocomplete> -->
-      <!-- <v-toolbar dense floating dark>
-        <v-text-field
-          hide-details
-          prepend-icon="mdi-magnify"
-          single-line
-        ></v-text-field>
+      <SearchBar v-show="false"></SearchBar>
 
-        <v-btn icon>
-          <v-icon>mdi-crosshairs-gps</v-icon>
-        </v-btn>
+      <SearchApiBar></SearchApiBar>
 
-        <v-btn icon>
-          <v-icon>mdi-dots-vertical</v-icon>
-        </v-btn>
-      </v-toolbar> -->
-      <!-- :items="usernames" -->
+      <v-btn class="mx-3" elevation="2" icon dense @click="toggleTheme"
+        ><v-icon>mdi-invert-colors</v-icon></v-btn
+      >
     </v-app-bar>
 
-    <v-navigation-drawer
-      v-model="drawer"
-      app
-      dark
-      color="teal darken-1"
-      temporary
-    >
+    <v-navigation-drawer v-model="drawer" class="info" app temporary>
       <v-list nav dense>
         <v-list-item-group
           v-model="group"
-          active-class="teal darken-1--text text--accent-4"
+          active-class="primary darken-1--text text--accent-4"
         >
           <v-list-item
             v-for="item in navDrawerItems"
@@ -64,26 +39,32 @@
     </v-navigation-drawer>
 
     <!-- Sizes your content based upon application components -->
-    <v-main app>
+    <v-main aria-haspopup="">
       <!-- Provides the application the proper gutter -->
       <v-container fluid>
-        <!-- If using vue-router -->
         <router-view></router-view>
       </v-container>
     </v-main>
 
-    <v-footer app> The footer </v-footer>
+    <v-footer class="primary" app> The footer </v-footer>
   </v-app>
 </template>
+<style>
+html {
+  overflow-y: auto;
+}
+</style>
 
 <script>
 // import HelloWorld from "./components/HelloWorld";
 import { mapState } from "vuex";
 import SearchBar from "./components/SearchBar.vue";
+import SearchApiBar from "./components/SearchApiBar.vue";
 
 export default {
   name: "App",
-  components: { SearchBar },
+
+  components: { SearchBar, SearchApiBar },
   computed: {
     ...mapState({
       navDrawerItems: (state) => state.navDrawerItems,
@@ -93,10 +74,22 @@ export default {
     }),
     // usernames: this.users.name,
   },
+  methods: {
+    toggleTheme() {
+      console.log(this.themeToggler);
+      console.log(this.$vuetify);
+
+      this.$vuetify.theme.isDark = !this.$vuetify.theme.isDark;
+      this.$vuetify.theme.dark = this.themeToggler;
+      // this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
+      this.themeToggler = !this.themeToggler;
+    },
+  },
 
   data: () => ({
     drawer: false,
     group: null,
+    themeToggler: true,
     // usernames: users.name,
   }),
 };

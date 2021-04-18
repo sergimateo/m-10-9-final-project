@@ -54,7 +54,7 @@
         </v-list-item-action>
       </template>
     </v-autocomplete>
-    <template v-slot:extension>
+    <!-- <template v-slot:extension>
       <v-tabs
         v-model="tab"
         :hide-slider="!model"
@@ -65,7 +65,7 @@
         <v-tab :disabled="!model"> Trading </v-tab>
         <v-tab :disabled="!model"> Blog </v-tab>
       </v-tabs>
-    </template>
+    </template> -->
   </v-toolbar>
 </template>
 <script>

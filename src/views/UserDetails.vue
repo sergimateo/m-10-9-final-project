@@ -3,7 +3,7 @@
     <!-- <MainHeader :title="title"></MainHeader> -->
     <v-col
       ><v-row justify="space-around" class="mb-4">
-        <h3 class="mx-auto">{{ $route.params.username }} user details</h3>
+        <h2 class="mx-auto">User details</h2>
       </v-row>
       <v-card class="mx-auto" elevation="3" width="340">
         <!-- <v-img

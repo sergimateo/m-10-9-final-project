@@ -1,10 +1,10 @@
 <template>
   <div>
     <v-row justify="space-around" class="pb-4"
-      ><h1>This is the {{ headername }} page</h1></v-row
+      ><h1>{{ headername }} Section</h1></v-row
     >
     <div class="text-center pb-8">
-      <v-btn @click="$router.go(-1)" rounded color="teal darken-2" small dark>
+      <v-btn @click="$router.go(-1)" class="secondary" rounded small>
         Back
         <v-icon small class="pl-2"
           >mdi-arrow-left-thin-circle-outline</v-icon

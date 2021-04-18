@@ -2,54 +2,13 @@
   <v-container fluid class="users">
     <MainHeader :headername="headername"></MainHeader>
 
-    <!-- <v-row justify="center"> -->
     <router-view></router-view>
-    <!-- <v-col v-for="item in users" :key="item.id" cols="auto">
-        <v-card
-          class="d-flex flex-column mx-auto pb-1 align-content-center"
-          elevation="3"
-          width="340"
-          height="200"
-        >
-          <v-card-title class="mx-auto mb-auto user-title"
-            >{{ item.name }}
-          </v-card-title>
-
-          <v-card-actions justify="space-around">
-            <v-btn
-              :to="{
-                name: 'UserDetails',
-                params: { name: item.name },
-              }"
-              class="mx-auto"
-              small
-              rounded
-              color="teal"
-              dark
-            >
-              View details
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-col> -->
-    <!-- </v-row> -->
   </v-container>
-  <!-- <v-card class="mx-auto pb-1" elevation="2" width="400" height="100">
-          <v-card-title>{{ item.name }} </v-card-title>
-
-          <v-card-actions>
-            <v-row justify="space-around"
-              ><v-btn small rounded color="teal" dark> View details </v-btn>
-            </v-row>
-          </v-card-actions>
-        </v-card> -->
 </template>
 <style scoped>
 .user-title {
   word-break: normal;
-
   text-align: center;
-  /* color: red; */
 }
 </style>
 <script>
