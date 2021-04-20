@@ -16,14 +16,14 @@
         <v-card-subtitle> {{ user.email }} </v-card-subtitle>
 
         <v-card-actions>
-          <v-btn color="teal darken-2" text @click="show = !show">
+          <v-btn text color="info" class="px-2" @click="show = !show">
             More details
           </v-btn>
 
           <v-spacer></v-spacer>
 
           <v-btn icon @click="show = !show">
-            <v-icon color="teal darken-2">{{
+            <v-icon color="info">{{
               show ? "mdi-chevron-up" : "mdi-chevron-down"
             }}</v-icon>
           </v-btn>

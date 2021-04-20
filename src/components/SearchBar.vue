@@ -1,20 +1,21 @@
 <template>
   <v-autocomplete
-    class="mr-2 ml-16 my-2"
+    class="mr-2 ml-16 my-2 info"
     flat
     dark
     clearable
     dense
     v-model="select"
     no-data-text="User not found"
-    hide-details
     :hide-no-data="hideNoUsersMsg"
+    hide-details
     auto-select-first
     label="Search Users"
     :items="names"
+    :loading="isLoading"
     :search-input.sync="search"
     prepend-inner-icon="mdi-magnify"
-    @click:prepend-inner="handleAppendOuterIconClick"
+    @click:prepend-inner="handlePrependInnerIconClick"
     @update:search-input="updateUser"
     solo-inverted
   ></v-autocomplete>
@@ -59,7 +60,7 @@ export default {
   },
   methods: {
     querySelections(v) {
-      this.loading = true;
+      this.isLoading = true;
       this.hideNoUsersMsg = true;
       // Simulated ajax query
       setTimeout(() => {
@@ -71,7 +72,7 @@ export default {
             );
           });
         this.hideNoUsersMsg = false;
-        this.loading = false;
+        this.isLoading = false;
       }, 500);
     },
     updateUser(e) {
@@ -81,11 +82,18 @@ export default {
       e = "";
       console.log(e);
     },
-    handleAppendOuterIconClick(e) {
+    // handleAppendOuterIconClick(e) {
+    //   console.log(e);
+    //   console.log(this.username);
+
+    //   router.push({ name: "UserDetails", params: { username: this.username } });
+    //   //   this.doChange(this.previousValue);
+    // },
+    handlePrependInnerIconClick(e) {
       console.log(e);
       console.log(this.username);
+
       router.push({ name: "UserDetails", params: { username: this.username } });
-      //   this.doChange(this.previousValue);
     },
   },
 
@@ -94,7 +102,7 @@ export default {
     names: [],
     search: null,
     select: null,
-    loading: false,
+    isLoading: false,
     hideNoUsersMsg: true,
   }),
 };

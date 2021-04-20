@@ -5,24 +5,36 @@
 
       <v-toolbar-title
         ><router-link to="/" tag="span" style="cursor: pointer">
-          Vue.js Final Project
+          <strong> Vue.js Final Project</strong>
         </router-link></v-toolbar-title
       >
       <v-spacer class="mx-auto"></v-spacer>
       <SearchBar v-show="false"></SearchBar>
+      <SearchBarNew></SearchBarNew>
+      <SearchApiBar v-show="false"></SearchApiBar>
 
-      <SearchApiBar></SearchApiBar>
-
-      <v-btn class="mx-3" elevation="2" icon dense @click="toggleTheme"
-        ><v-icon>mdi-invert-colors</v-icon></v-btn
-      >
+      <v-tooltip color="secondary" bottom>
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            v-bind="attrs"
+            v-on="on"
+            class="mx-3 info"
+            elevation="2"
+            icon
+            dense
+            @click="toggleTheme"
+            ><v-icon>mdi-invert-colors</v-icon></v-btn
+          >
+        </template>
+        <span>Light/Dark Theme</span>
+      </v-tooltip>
     </v-app-bar>
 
-    <v-navigation-drawer v-model="drawer" class="info" app temporary>
+    <v-navigation-drawer v-model="drawer" class="primary" app temporary>
       <v-list nav dense>
         <v-list-item-group
           v-model="group"
-          active-class="primary darken-1--text text--accent-4"
+          active-class="accent darken-1--text text--accent-4"
         >
           <v-list-item
             v-for="item in navDrawerItems"
@@ -59,12 +71,13 @@ html {
 // import HelloWorld from "./components/HelloWorld";
 import { mapState } from "vuex";
 import SearchBar from "./components/SearchBar.vue";
+import SearchBarNew from "./components/SearchBarNew.vue";
 import SearchApiBar from "./components/SearchApiBar.vue";
 
 export default {
   name: "App",
 
-  components: { SearchBar, SearchApiBar },
+  components: { SearchBar, SearchBarNew, SearchApiBar },
   computed: {
     ...mapState({
       navDrawerItems: (state) => state.navDrawerItems,

@@ -17,11 +17,9 @@
               name: 'AlbumDetails',
               params: { albumtitle: item.title, albumid: item.id },
             }"
-            class="mx-auto"
+            class="mx-auto info"
             small
             rounded
-            color="teal"
-            dark
           >
             View details
           </v-btn>

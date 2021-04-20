@@ -17,11 +17,9 @@
               name: 'UserDetails',
               params: { username: item.name },
             }"
-            class="mx-auto"
+            class="mx-auto info"
             small
             rounded
-            color="teal"
-            dark
           >
             View details
           </v-btn>

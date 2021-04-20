@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <CryptoBar v-show="false"></CryptoBar>
-    <StateBar v-show="true"></StateBar>
+    <StateBar v-show="false"></StateBar>
     <MainView />
   </div>
 </template>

@@ -1,15 +1,18 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import axios from "axios";
+import VueAxios from "vue-axios";
 import albumsList from "./../assets/albumsList.json";
-import usersList from "./../assets/usersList.json";
+// import usersList from "./../assets/usersList.json";
 import picturesList from "./../assets/picturesList.json";
 
 Vue.use(Vuex);
+Vue.use(VueAxios, axios);
 
 export default new Vuex.Store({
   state: {
     albums: albumsList,
-    users: usersList,
+    users: [],
     pictures: picturesList,
     navDrawerItems: [
       { id: "1", title: "Home", icon: "mdi-home", to: "/" },
@@ -23,12 +26,28 @@ export default new Vuex.Store({
       { id: "4", title: "About", icon: "mdi-information", to: "/about" },
     ],
   },
-  // getters: {
-  //   usernames: (state) => {
-  //     state.users.name
-  //   },
-  // },
-  mutations: {},
-  actions: {},
+  getters: {
+    usersGetter: (state) => {
+      return state.users;
+    },
+  },
+  mutations: {
+    SET_Users(state, users) {
+      state.users = users;
+    },
+  },
+  actions: {
+    loadUsers({ commit }) {
+      axios
+        .get("https://jsonplaceholder.typicode.com/users", {})
+        .then((response) => response.data)
+        // .then((users)=> await response.json());
+        .then((users) => {
+          console.log(users);
+          console.log("holi");
+          commit("SET_Users", users);
+        });
+    },
+  },
   modules: {},
 });

@@ -16,9 +16,9 @@
     </v-card-text> -->
   <!-- <v-card-text> -->
   <v-autocomplete
-    class="mr-2 px-8 my-2"
+    class="ml-4 my-1 info"
+    rounded
     clearable
-    return-object
     v-model="model"
     :items="items"
     :loading="isLoading"
@@ -31,8 +31,10 @@
     label="Search Users"
     placeholder=""
     prepend-inner-icon="mdi-magnify"
+    @click:prepend-inner="handlePrependInnerIconClick"
   ></v-autocomplete>
   <!-- </v-card-text> -->
+  <!-- return-object -->
   <!-- <v-divider></v-divider> -->
   <!-- <v-expand-transition>
       <v-list v-if="model" class="red lighten-3">
@@ -55,37 +57,36 @@
   <!-- </v-container> -->
 </template>
 <script>
+import router from "./../router";
 export default {
   name: "SearchApiBar",
   data: () => ({
     descriptionLimit: 60,
-    entries: [],
+    items: [],
     isLoading: false,
     model: null,
     search: null,
   }),
 
   computed: {
-    fields() {
-      if (!this.model) return [];
-
-      return Object.keys(this.model).map((key) => {
-        return {
-          key,
-          value: this.model[key] || "n/a",
-        };
-      });
-    },
-    items() {
-      return this.entries.map((entry) => {
-        const Description =
-          entry.Description.length > this.descriptionLimit
-            ? entry.Description.slice(0, this.descriptionLimit) + "..."
-            : entry.Description;
-
-        return Object.assign({}, entry, { Description });
-      });
-    },
+    // fields() {
+    //   if (!this.model) return [];
+    //   return Object.keys(this.model).map((key) => {
+    //     return {
+    //       key,
+    //       value: this.model[key] || "n/a",
+    //     };
+    //   });
+    // },
+    // items() {
+    //   return this.entries.map((entry) => {
+    //     const Description =
+    //       entry.Description.length > this.descriptionLimit
+    //         ? entry.Description.slice(0, this.descriptionLimit) + "..."
+    //         : entry.Description;
+    //     return Object.assign({}, entry, { Description });
+    //   });
+    // },
   },
 
   watch: {
@@ -100,17 +101,23 @@ export default {
       this.isLoading = true;
 
       // Lazily load input items
-      fetch("https://api.publicapis.org/entries")
+      fetch("https://jsonplaceholder.typicode.com/users")
         .then((res) => res.json())
         .then((res) => {
-          const { count, entries } = res;
-          this.count = count;
-          this.entries = entries;
+          this.items = res;
         })
         .catch((err) => {
           console.log(err);
         })
         .finally(() => (this.isLoading = false));
+    },
+  },
+  methods: {
+    handlePrependInnerIconClick(e) {
+      console.log(e);
+      console.log(this.username);
+
+      router.push({ name: "UserDetails", params: { username: this.username } });
     },
   },
 };
