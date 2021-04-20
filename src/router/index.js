@@ -65,12 +65,12 @@ const routes = [
       },
     ],
   },
-  {
-    path: "/dummy",
-    name: "Dummy",
-    component: () =>
-      import(/* webpackChunkName: "dummylist" */ "../views/DummyList.vue"),
-  },
+  // {
+  //   path: "/dummy",
+  //   name: "Dummy",
+  //   component: () =>
+  //     import(/* webpackChunkName: "dummylist" */ "../views/borrables/DummyList.vue"),
+  // },
 ];
 
 const router = new VueRouter({

@@ -53,12 +53,9 @@
 
 <script>
 import { mapState } from "vuex";
-// import store from "vuex";
-// import router from "./../components/MainHeader.vue";
 
 export default {
   name: "UserDetails",
-  // components: { MainHeader },
   computed: {
     ...mapState({
       users: (state) => state.users,

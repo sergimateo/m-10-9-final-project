@@ -1,13 +1,13 @@
-import ApiPlaceholder from "./ApiPlacehorder.vue";
+import ApiPlaceholder from "./ApiPlaceholder.js";
 
 export default {
   GetAlbumsPlaceholder() {
     return ApiPlaceholder().get("/albums");
   },
   GetPicturesPlaceholder() {
-    return ApiPlaceholder.get("/pictures");
+    return ApiPlaceholder().get("/photos");
   },
   GetUsersPlaceholder() {
-    return ApiPlaceholder.get("/users");
+    return ApiPlaceholder().get("/users");
   },
 };

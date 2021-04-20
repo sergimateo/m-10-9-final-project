@@ -1,19 +1,48 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import axios from "axios";
-import VueAxios from "vue-axios";
-import albumsList from "./../assets/albumsList.json";
-// import usersList from "./../assets/usersList.json";
-import picturesList from "./../assets/picturesList.json";
+import PlaceholderService from "../Services/PlaceholderService";
 
 Vue.use(Vuex);
-Vue.use(VueAxios, axios);
 
 export default new Vuex.Store({
   state: {
-    albums: albumsList,
+    albums: [],
     users: [],
-    pictures: picturesList,
+    pictures: [],
+    mostVisitedUsers: [
+      {
+        id: 1,
+        name: "Leanne Graham",
+        username: "Bret",
+        email: "Sincere@april.biz",
+        views: 4,
+      },
+
+      {
+        id: 2,
+        name: "Ervin Howell",
+        username: "Antonette",
+        email: "Shanna@melissa.tv",
+        views: 3,
+      },
+
+      {
+        id: 3,
+        name: "Clementine Bauch",
+        username: "Samantha",
+        email: "Nathan@yesenia.net",
+        views: 2,
+      },
+
+      {
+        id: 4,
+        name: "Patricia Lebsack",
+        username: "Karianne",
+        email: "Julianne.OConner@kory.org",
+        views: 1,
+      },
+    ],
+    mostVisitedAlbums: [],
     navDrawerItems: [
       { id: "1", title: "Home", icon: "mdi-home", to: "/" },
       { id: "2", title: "Users", icon: "mdi-account-group", to: "/users" },
@@ -32,21 +61,49 @@ export default new Vuex.Store({
     },
   },
   mutations: {
-    SET_Users(state, users) {
-      state.users = users;
+    SET_Users(state, items) {
+      state.users = items;
+    },
+    SET_Albums(state, items) {
+      state.albums = items;
+    },
+    SET_Pictures(state, items) {
+      state.pictures = items;
     },
   },
   actions: {
-    loadUsers({ commit }) {
-      axios
-        .get("https://jsonplaceholder.typicode.com/users", {})
-        .then((response) => response.data)
-        // .then((users)=> await response.json());
-        .then((users) => {
-          console.log(users);
-          console.log("holi");
-          commit("SET_Users", users);
-        });
+    async loadUsers({ commit }) {
+      const response = await PlaceholderService.GetUsersPlaceholder();
+      commit("SET_Users", response.data);
+    },
+    async loadAlbums({ commit }) {
+      const response = await PlaceholderService.GetAlbumsPlaceholder();
+      commit("SET_Albums", response.data);
+    },
+    async loadPictures({ commit }) {
+      const response = await PlaceholderService.GetPicturesPlaceholder();
+      commit("SET_Pictures", response.data);
+    },
+    userViewed(e, user) {
+      console.log("userViewed");
+      console.log(e);
+      console.log(user);
+      // const viewed = this.mostVisitedUsers.findIndex(
+      //   (item) => item.id === user.id
+      // );
+      // if (viewed === -1) {
+      //   user.views = 1;
+      //   this.mostVisitedUsers.push(user);
+      // } else {
+      //   let userViewed = this.mostVisitedUsers.find(
+      //     (item) => item.id === user.id
+      //   );
+      //   userViewed.views++;
+      // }
+    },
+    albumViewed(e) {
+      console.log("albumViewed");
+      console.log(e);
     },
   },
   modules: {},

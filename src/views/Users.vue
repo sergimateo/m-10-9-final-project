@@ -12,17 +12,11 @@
 }
 </style>
 <script>
-import { mapState } from "vuex";
 import MainHeader from "./../components/MainHeader.vue";
 
 export default {
   name: "Users",
   components: { MainHeader },
-  computed: {
-    ...mapState({
-      users: (state) => state.users,
-    }),
-  },
   data() {
     return {
       headername: "Users",

@@ -13,10 +13,7 @@
 
         <v-card-actions justify="space-around">
           <v-btn
-            :to="{
-              name: 'AlbumDetails',
-              params: { albumtitle: item.title, albumid: item.id },
-            }"
+            @click="handleViewDetails(item.title, item.id)"
             class="mx-auto info"
             small
             rounded
@@ -39,8 +36,7 @@
 </style>
 <script>
 import { mapState } from "vuex";
-// import MainHeader from "./../components/MainHeader.vue";
-// import Dummy from "./../components/Dummy.vue";
+import router from "../router";
 
 export default {
   name: "AlbumsList",
@@ -50,6 +46,23 @@ export default {
     ...mapState({
       albums: (state) => state.albums,
     }),
+  },
+  methods: {
+    handleViewDetails(title, id) {
+      // console.log(e);
+      this.$store.dispatch("albumUp");
+      router.push({
+        name: "AlbumDetails",
+        params: { albumtitle: title, albumid: id },
+      });
+    },
+  },
+  // :to="{
+  //             name: 'AlbumDetails',
+  //             params: { albumtitle: item.title, albumid: item.id },
+  //           }"
+  mounted() {
+    this.$store.dispatch("loadAlbums");
   },
   data() {
     return {

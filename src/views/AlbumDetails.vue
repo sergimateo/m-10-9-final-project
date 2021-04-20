@@ -40,6 +40,10 @@ export default {
       );
     },
   },
+  mounted() {
+    console.log("pics mounted");
+    this.$store.dispatch("loadPictures");
+  },
 
   data() {
     return {
