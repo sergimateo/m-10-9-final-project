@@ -1,5 +1,5 @@
 <template>
-  <v-container height="90vh">
+  <v-container>
     <v-row class="text-center">
       <v-col class="my-4">
         <h1 class="display-1 font-weight-bold mb-2">
@@ -29,10 +29,9 @@
               >
 
               <v-divider class="mx-4"></v-divider>
-              <v-card-text class="py-1">Album: X</v-card-text>
-              <v-card-text class="py-1"> Album: X </v-card-text>
-              <v-card-text class="py-1"> Album: X </v-card-text>
-              <v-card-text class="py-1"> Album: X </v-card-text>
+              <v-card-text v-for="item in albums" :key="item.id" class="py-1">
+                {{ item.title }}: {{ item.views }}
+              </v-card-text>
             </v-card>
           </v-col>
         </v-row>
@@ -42,14 +41,22 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapGetters } from "vuex";
 export default {
   name: "MainView",
   computed: {
-    ...mapState({
-      users: (state) => state.mostVisitedUsers,
-      albums: (state) => state.mostVisitedAlbums,
+    // ...mapState({
+    // users: (state) => state.mostVisitedUsers,
+    // albums: (state) => state.mostVisitedAlbums,
+    // }),
+    ...mapGetters({
+      users: "mostVisitedUsersGetter",
+      albums: "mostVisitedAlbumsGetter",
     }),
+  },
+  mounted() {
+    this.$store.dispatch("loadUsers");
+    this.$store.dispatch("loadAlbums");
   },
 
   data: () => ({}),

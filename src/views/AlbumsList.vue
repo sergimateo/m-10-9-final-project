@@ -27,20 +27,21 @@
 </template>
 
 <style scoped>
+/* aqui si que hace falta pasarle un word-break
+ a los titulos de los albums */
 .album-title {
   word-break: normal;
 
   text-align: center;
-  /* color: red; */
 }
 </style>
+
 <script>
 import { mapState } from "vuex";
 import router from "../router";
 
 export default {
   name: "AlbumsList",
-  // components: { MainHeader },
 
   computed: {
     ...mapState({
@@ -49,25 +50,13 @@ export default {
   },
   methods: {
     handleViewDetails(title, id) {
-      // console.log(e);
-      this.$store.dispatch("albumUp");
+      const viewedAlbum = this.albums.find((item) => item.id === id);
+      this.$store.dispatch("albumViewed", viewedAlbum);
       router.push({
         name: "AlbumDetails",
         params: { albumtitle: title, albumid: id },
       });
     },
-  },
-  // :to="{
-  //             name: 'AlbumDetails',
-  //             params: { albumtitle: item.title, albumid: item.id },
-  //           }"
-  mounted() {
-    this.$store.dispatch("loadAlbums");
-  },
-  data() {
-    return {
-      title: "Albums",
-    };
   },
 };
 </script>

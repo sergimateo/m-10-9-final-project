@@ -1,6 +1,7 @@
 <template>
   <v-container fluid class="albums">
     <MainHeader :headername="headername"></MainHeader>
+
     <router-view></router-view>
   </v-container>
 </template>
@@ -14,7 +15,7 @@
 }
 </style>
 <script>
-import { mapState } from "vuex";
+// import { mapState } from "vuex";
 import MainHeader from "./../components/MainHeader.vue";
 
 export default {
@@ -22,9 +23,9 @@ export default {
   components: { MainHeader },
 
   computed: {
-    ...mapState({
-      albums: (state) => state.albums,
-    }),
+    // ...mapState({
+    //   albums: (state) => state.albums,
+    // }),
   },
   data() {
     return {

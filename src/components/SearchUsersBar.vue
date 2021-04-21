@@ -22,45 +22,31 @@
 </template>
 
 <script>
-// import { mapState } from "vuex";
 import { mapGetters } from "vuex";
 import router from "../router";
 
 export default {
   name: "SearchUsersBar",
   computed: {
-    // ...mapState({
-    //   users: (state) => state.users,
-    // }),
     ...mapGetters(["usersGetter"]),
   },
   watch: {
     search() {
       if (!this.search) {
-        console.log("soc null");
         return;
       }
       if (this.search.length < 2) {
-        console.log("es petit");
         this.UsersDisplayMenu = [];
         this.menuIsDisabled = true;
       } else {
-        console.log("es gran");
         this.UsersDisplayMenu = this.usersGetter;
         this.menuIsDisabled = false;
       }
     },
   },
-  mounted() {
-    this.$store.dispatch("loadUsers");
-  },
 
   methods: {
-    handlePrependInnerIconClick(e) {
-      console.log("handleprepend");
-      console.log(e);
-      console.log(this.username);
-
+    handlePrependInnerIconClick() {
       if (this.username) {
         this.$store.dispatch("userViewed", this.username);
         router.push({
@@ -71,8 +57,6 @@ export default {
     },
     updateUser(e) {
       this.username = e;
-      console.log("updateuser");
-      console.log(this.username);
     },
     clearSearchAndSelection() {
       this.UsersDisplayMenu = [];

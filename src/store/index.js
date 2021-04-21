@@ -9,39 +9,8 @@ export default new Vuex.Store({
     albums: [],
     users: [],
     pictures: [],
-    mostVisitedUsers: [
-      {
-        id: 1,
-        name: "Leanne Graham",
-        username: "Bret",
-        email: "Sincere@april.biz",
-        views: 4,
-      },
+    mostVisitedUsers: [],
 
-      {
-        id: 2,
-        name: "Ervin Howell",
-        username: "Antonette",
-        email: "Shanna@melissa.tv",
-        views: 3,
-      },
-
-      {
-        id: 3,
-        name: "Clementine Bauch",
-        username: "Samantha",
-        email: "Nathan@yesenia.net",
-        views: 2,
-      },
-
-      {
-        id: 4,
-        name: "Patricia Lebsack",
-        username: "Karianne",
-        email: "Julianne.OConner@kory.org",
-        views: 1,
-      },
-    ],
     mostVisitedAlbums: [],
     navDrawerItems: [
       { id: "1", title: "Home", icon: "mdi-home", to: "/" },
@@ -58,6 +27,52 @@ export default new Vuex.Store({
   getters: {
     usersGetter: (state) => {
       return state.users;
+    },
+    mostVisitedUsersGetter: (state) => {
+      if (state.mostVisitedUsers.length < 1) {
+        console.log("primer ordeño lo hace 2 veces?");
+        const sortedUsers = state.users;
+        sortedUsers.sort((userA, userB) =>
+          userA.name.localeCompare(userB.name)
+        );
+        const slicedUsers = sortedUsers.slice(0, 5);
+        slicedUsers.forEach((item) => (item.views = 0));
+        state.mostVisitedUsers = slicedUsers;
+        return slicedUsers;
+      } else {
+        console.log("para ver si ordena el getter con mas 2");
+        const sortedUsers = state.mostVisitedUsers.sort(
+          (userA, userB) =>
+            userB.views - userA.views || userA.name.localeCompare(userB.name)
+        );
+        const slicedUsers = sortedUsers.slice(0, 5);
+        state.mostVisitedUsers = slicedUsers;
+
+        return state.mostVisitedUsers;
+      }
+    },
+    mostVisitedAlbumsGetter: (state) => {
+      if (state.mostVisitedAlbums.length < 1) {
+        const sortedAlbums = state.albums;
+        sortedAlbums.sort((albumA, albumB) =>
+          albumA.title.localeCompare(albumB.title)
+        );
+        const slicedAlbums = sortedAlbums.slice(0, 5);
+        slicedAlbums.forEach((item) => (item.views = 0));
+        state.mostVisitedAlbums = slicedAlbums;
+
+        return slicedAlbums;
+      } else {
+        const sortedAlbums = state.mostVisitedAlbums.sort(
+          (albumA, albumB) =>
+            albumB.views - albumA.views ||
+            albumA.title.localeCompare(albumB.title)
+        );
+
+        state.mostVisitedAlbums = sortedAlbums.slice(0, 5);
+
+        return state.mostVisitedAlbums;
+      }
     },
   },
   mutations: {
@@ -85,25 +100,53 @@ export default new Vuex.Store({
       commit("SET_Pictures", response.data);
     },
     userViewed(e, user) {
-      console.log("userViewed");
+      console.log("userViewed action");
       console.log(e);
-      console.log(user);
-      // const viewed = this.mostVisitedUsers.findIndex(
-      //   (item) => item.id === user.id
-      // );
-      // if (viewed === -1) {
-      //   user.views = 1;
-      //   this.mostVisitedUsers.push(user);
-      // } else {
-      //   let userViewed = this.mostVisitedUsers.find(
-      //     (item) => item.id === user.id
-      //   );
-      //   userViewed.views++;
-      // }
+      // console.log(user);
+      // console.log(this.state.mostVisitedUsers);
+      const viewed = this.state.mostVisitedUsers.findIndex(
+        (item) => item.id === user.id
+      );
+      // console.log(viewed);
+      if (viewed === -1) {
+        user.views = 1;
+        this.state.mostVisitedUsers.push(user);
+        console.log("update con el push");
+      } else {
+        let userViewed = this.state.mostVisitedUsers.find(
+          (item) => item.id === user.id
+        );
+        userViewed.views++;
+        this.state.mostVisitedUsers.sort(
+          (userA, userB) =>
+            userB.views - userA.views || userA.name.localeCompare(userB.name)
+        );
+        console.log("por aqui no actualiza verdad? ahora si!");
+      }
     },
-    albumViewed(e) {
-      console.log("albumViewed");
+    albumViewed(e, album) {
+      console.log("albumViewed action");
       console.log(e);
+      console.log(album);
+      console.log(this.state.mostVisitedAlbums);
+      const viewed = this.state.mostVisitedAlbums.findIndex(
+        (item) => item.id === album.id
+      );
+      console.log(viewed);
+      if (viewed === -1) {
+        album.views = 1;
+        this.state.mostVisitedAlbums.push(album);
+      } else {
+        let albumViewed = this.state.mostVisitedAlbums.find(
+          (item) => item.id === album.id
+        );
+        this.state.mostVisitedAlbums.sort(
+          (albumA, albumB) =>
+            albumB.views - albumA.views ||
+            albumA.title.localeCompare(albumB.title)
+        );
+        albumViewed.views++;
+      }
     },
   },
   modules: {},

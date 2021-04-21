@@ -8,7 +8,7 @@
         height="200"
       >
         <v-card-title class="mx-auto mb-auto user-title"
-          >{{ item.name }}
+          >{{ toUpperCase(item.name) }}
         </v-card-title>
 
         <v-card-actions justify="space-around">
@@ -21,22 +21,21 @@
             View details
           </v-btn>
         </v-card-actions>
-        <!-- :to="{
-              name: 'UserDetails',
-              params: { username: item.name },
-            }" -->
       </v-card>
     </v-col>
   </v-row>
 </template>
+
 <style scoped>
-/* no hace falta pero por si llegase un nombre de usuario demasiado largo, no le parte la palabra */
+/* no hace faltam pero por si llegase un nombre de usuario demasiado
+ largo, hacerle un word-break */
 .user-title {
   word-break: normal;
 
   text-align: center;
 }
 </style>
+
 <script>
 import { mapState } from "vuex";
 import router from "../router";
@@ -50,6 +49,9 @@ export default {
     }),
   },
   methods: {
+    toUpperCase(name) {
+      return name.toUpperCase();
+    },
     handleViewDetails(e) {
       const viewedUser = this.users.find((item) => item.id === e);
 
@@ -60,9 +62,9 @@ export default {
       });
     },
   },
-  mounted() {
-    this.$store.dispatch("loadUsers");
-  },
+  // mounted() {
+  //   this.$store.dispatch("loadUsers");
+  // },
   data() {
     return {
       title: "Users",
