@@ -3,23 +3,25 @@
     <v-app-bar class="primary" app>
       <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
       <template v-slot:extension>
-        <v-tabs class="tabs lighten-4" align-with-title>
+        <v-tabs class="d-none d-md-block" align-with-title>
+          <v-tabs-slider class="secondary"></v-tabs-slider>
           <v-tab
-            class=""
+            active-class="secondary--text"
             v-for="item in navDrawerItems"
             :key="item.id"
             :to="item.to"
             >{{ item.title }}</v-tab
           >
         </v-tabs>
+        <SearchUsersBar class="d-md-none"></SearchUsersBar>
       </template>
       <v-toolbar-title
         ><router-link to="/" tag="span" style="cursor: pointer">
-          <strong> Vue.js Final Project</strong>
+          <strong> Vue Final Project</strong>
         </router-link></v-toolbar-title
       >
       <v-spacer class="mx-auto"></v-spacer>
-      <SearchUsersBar></SearchUsersBar>
+      <SearchUsersBar class="d-none d-md-block"></SearchUsersBar>
 
       <v-tooltip color="secondary" bottom>
         <template v-slot:activator="{ on, attrs }">

@@ -10,8 +10,10 @@ export default new Vuex.Store({
     users: [],
     pictures: [],
     mostVisitedUsers: [],
-
     mostVisitedAlbums: [],
+    loadingMostVisitedUsersCard: false,
+    loadingMostVisitedAlbumsCard: false,
+    loadingPictures: false,
     navDrawerItems: [
       { id: "1", title: "Home", icon: "mdi-home", to: "/" },
       { id: "2", title: "Users", icon: "mdi-account-group", to: "/users" },
@@ -25,6 +27,15 @@ export default new Vuex.Store({
     ],
   },
   getters: {
+    loadingMostVisitedUsersCardGetter: (state) => {
+      return state.loadingMostVisitedUsersCard;
+    },
+    loadingMostVisitedAlbumsCardGetter: (state) => {
+      return state.loadingMostVisitedAlbumsCard;
+    },
+    loadingPicturesGetter: (state) => {
+      return state.loadingPictures;
+    },
     usersGetter: (state) => {
       return state.users;
     },
@@ -78,24 +89,34 @@ export default new Vuex.Store({
   mutations: {
     SET_Users(state, items) {
       state.users = items;
+      this.state.loadingMostVisitedUsersCard = false;
     },
     SET_Albums(state, items) {
       state.albums = items;
+      this.state.loadingMostVisitedAlbumsCard = false;
     },
     SET_Pictures(state, items) {
       state.pictures = items;
+      this.state.loadingPictures = false;
     },
   },
   actions: {
     async loadUsers({ commit }) {
+      this.state.loadingMostVisitedUsersCard = true;
       const response = await PlaceholderService.GetUsersPlaceholder();
-      commit("SET_Users", response.data);
+      setTimeout(() => {
+        commit("SET_Users", response.data);
+      }, 2000);
+      // commit("SET_Users", response.data);
     },
     async loadAlbums({ commit }) {
+      this.state.loadingMostVisitedAlbumsCard = true;
       const response = await PlaceholderService.GetAlbumsPlaceholder();
       commit("SET_Albums", response.data);
     },
     async loadPictures({ commit }) {
+      this.state.loadingPictures = true;
+
       const response = await PlaceholderService.GetPicturesPlaceholder();
       commit("SET_Pictures", response.data);
     },

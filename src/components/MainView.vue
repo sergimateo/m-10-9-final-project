@@ -3,34 +3,48 @@
     <v-row class="text-center">
       <v-col class="my-4">
         <h1 class="display-1 font-weight-bold mb-2">
-          Welcome to my Vue.js Last Project
+          Welcome To Module 10.9 Vue Final Project
         </h1>
       </v-col>
 
       <v-col class="mt-5" cols="12">
-        <!-- <h2 class="headline font-weight-bold mb-3">Las tarjetitas resumen:</h2> -->
-
+        <!-- estas 2 tarjetas podrian ser un componente en vez de repetir el codigo 2 veces.... -->
         <v-row justify="center">
           <v-col cols="auto">
-            <v-card class="mx-auto" elevation="3" width="340">
-              <v-card-text class="text-center font-weight-bold title"
+            <v-card
+              shaped
+              :loading="loadingUsers"
+              class="mx-auto primary lighten-2"
+              rounded-lg
+              elevation="3"
+              width="340"
+              min-height="218"
+            >
+              <v-card-text class="secondary text-center font-weight-bold title"
                 >Most Visited Users</v-card-text
               >
-              <v-divider class="mx-4"></v-divider>
+
               <v-card-text v-for="item in users" :key="item.id" class="py-1">
-                {{ item.name }}: {{ item.views }}
+                <strong>{{ item.name }}: {{ item.views }}</strong>
               </v-card-text>
             </v-card>
           </v-col>
           <v-col cols="auto">
-            <v-card class="mx-auto" elevation="3" width="340">
-              <v-card-text class="text-center font-weight-bold title"
+            <v-card
+              shaped
+              :loading="loadingAlbums"
+              class="mx-auto primary lighten-2"
+              elevation="3"
+              width="340"
+              min-height="218"
+            >
+              <v-card-text class="secondary text-center font-weight-bold title"
                 >Most Visited Albums</v-card-text
               >
 
-              <v-divider class="mx-4"></v-divider>
+              <!-- <v-divider class="mx-4"></v-divider> -->
               <v-card-text v-for="item in albums" :key="item.id" class="py-1">
-                {{ item.title }}: {{ item.views }}
+                <strong>{{ item.title }}: {{ item.views }} </strong>
               </v-card-text>
             </v-card>
           </v-col>
@@ -52,13 +66,18 @@ export default {
     ...mapGetters({
       users: "mostVisitedUsersGetter",
       albums: "mostVisitedAlbumsGetter",
+      loadingUsers: "loadingMostVisitedUsersCardGetter",
+      loadingAlbums: "loadingMostVisitedAlbumsCardGetter",
     }),
   },
   mounted() {
     this.$store.dispatch("loadUsers");
     this.$store.dispatch("loadAlbums");
+    this.$store.dispatch("loadPictures");
   },
 
-  data: () => ({}),
+  data: () => ({
+    loading: true,
+  }),
 };
 </script>
