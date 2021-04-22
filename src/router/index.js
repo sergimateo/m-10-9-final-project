@@ -13,13 +13,12 @@ const routes = [
   {
     path: "/about",
     name: "About",
-
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
   },
+  //los paths de /users y /albums llevan rutas anidadas
   {
     path: "/users",
-    // name: "UsersList",
     component: () =>
       import(/* webpackChunkName: "users" */ "../views/Users.vue"),
     children: [
@@ -39,11 +38,8 @@ const routes = [
       },
     ],
   },
-
   {
     path: "/albums",
-    // // name: "AlbumsList",
-
     component: () =>
       import(/* webpackChunkName: "albums" */ "../views/Albums.vue"),
     children: [
@@ -65,12 +61,6 @@ const routes = [
       },
     ],
   },
-  // {
-  //   path: "/dummy",
-  //   name: "Dummy",
-  //   component: () =>
-  //     import(/* webpackChunkName: "dummylist" */ "../views/borrables/DummyList.vue"),
-  // },
 ];
 
 const router = new VueRouter({

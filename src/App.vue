@@ -1,9 +1,10 @@
 <template>
   <v-app>
     <AppToolbar></AppToolbar>
-    <!-- Sizes your content based upon application components -->
     <v-main aria-haspopup="">
-      <!-- Provides the application the proper gutter -->
+      <!-- La transicion esta 100% reciclada del
+      formulario Vue de los lagartos de V. Con AnimateCSS y listo calisto.
+      No me he estado nada de tiempo en hacer nuevas animaciones, transiciones etc -->
       <v-container v-show="true" fluid>
         <transition
           appear
@@ -16,7 +17,6 @@
         </transition>
       </v-container>
     </v-main>
-
     <v-footer class="primary justify-center" app>
       <div>Made with</div>
       <v-icon class="px-1" color="secondary">mdi-heart</v-icon>
@@ -31,12 +31,10 @@ html {
 </style>
 
 <script>
-// import { mapState } from "vuex";
 import AppToolbar from "./components/AppToolbar.vue";
 
 export default {
   name: "App",
-
   components: { AppToolbar },
 };
 </script>

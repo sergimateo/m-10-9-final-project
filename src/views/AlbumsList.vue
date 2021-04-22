@@ -2,6 +2,7 @@
   <v-row justify="center">
     <v-col v-for="item in albums" :key="item.id" cols="auto">
       <v-card
+        shaped
         class="d-flex flex-column mx-auto pb-1 align-content-center"
         elevation="3"
         width="340"
@@ -37,15 +38,15 @@
 </style>
 
 <script>
-import { mapState } from "vuex";
+import { mapGetters } from "vuex";
 import router from "../router";
 
 export default {
   name: "AlbumsList",
 
   computed: {
-    ...mapState({
-      albums: (state) => state.albums,
+    ...mapGetters({
+      albums: "albumsGetter",
     }),
   },
   methods: {

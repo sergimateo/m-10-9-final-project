@@ -17,7 +17,7 @@ export default new Vuetify({
         warning: colors.orange.base,
         info: colors.lightGreen.lighten1,
         tabs: colors.deepOrange.lighten1,
-        mostvisited: colors.green.base,
+        // mostvisited: colors.green.base,
         // background: colors.indigo.lighten5,
       },
       dark: {
@@ -28,10 +28,11 @@ export default new Vuetify({
         warning: colors.orange.base,
         info: colors.lightGreen.darken3,
         success: colors.green.base,
-        // si pongo custom properties, puedo
+        // si pongo customProperties true, puedo
         // crear nuevas variables a parte de las default
         // header: colors.red.base,
         // footer: colors.red.darken3,
+        // mostvisited: colors.green.base,
       },
     },
   },

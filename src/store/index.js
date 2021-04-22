@@ -13,7 +13,6 @@ export default new Vuex.Store({
     mostVisitedAlbums: [],
     loadingMostVisitedUsersCard: false,
     loadingMostVisitedAlbumsCard: false,
-    loadingPictures: false,
     navDrawerItems: [
       { id: "1", title: "Home", icon: "mdi-home", to: "/" },
       { id: "2", title: "Users", icon: "mdi-account-group", to: "/users" },
@@ -27,63 +26,40 @@ export default new Vuex.Store({
     ],
   },
   getters: {
+    usersGetter: (state) => {
+      return state.users;
+    },
+    albumsGetter: (state) => {
+      return state.albums;
+    },
+    picturesGetter: (state) => {
+      return state.pictures;
+    },
+
     loadingMostVisitedUsersCardGetter: (state) => {
       return state.loadingMostVisitedUsersCard;
     },
     loadingMostVisitedAlbumsCardGetter: (state) => {
       return state.loadingMostVisitedAlbumsCard;
     },
-    loadingPicturesGetter: (state) => {
-      return state.loadingPictures;
-    },
-    usersGetter: (state) => {
-      return state.users;
-    },
+
     mostVisitedUsersGetter: (state) => {
-      if (state.mostVisitedUsers.length < 1) {
-        console.log("primer ordeño lo hace 2 veces?");
-        const sortedUsers = state.users;
-        sortedUsers.sort((userA, userB) =>
-          userA.name.localeCompare(userB.name)
-        );
-        const slicedUsers = sortedUsers.slice(0, 5);
-        slicedUsers.forEach((item) => (item.views = 0));
-        state.mostVisitedUsers = slicedUsers;
-        return slicedUsers;
-      } else {
-        console.log("para ver si ordena el getter con mas 2");
-        const sortedUsers = state.mostVisitedUsers.sort(
-          (userA, userB) =>
-            userB.views - userA.views || userA.name.localeCompare(userB.name)
-        );
-        const slicedUsers = sortedUsers.slice(0, 5);
-        state.mostVisitedUsers = slicedUsers;
-
-        return state.mostVisitedUsers;
-      }
+      const sortedUsers = state.mostVisitedUsers.sort(
+        (userA, userB) =>
+          userB.views - userA.views || userA.name.localeCompare(userB.name)
+      );
+      state.mostVisitedUsers = sortedUsers.slice(0, 5);
+      return state.mostVisitedUsers;
     },
+
     mostVisitedAlbumsGetter: (state) => {
-      if (state.mostVisitedAlbums.length < 1) {
-        const sortedAlbums = state.albums;
-        sortedAlbums.sort((albumA, albumB) =>
+      const sortedAlbums = state.mostVisitedAlbums.sort(
+        (albumA, albumB) =>
+          albumB.views - albumA.views ||
           albumA.title.localeCompare(albumB.title)
-        );
-        const slicedAlbums = sortedAlbums.slice(0, 5);
-        slicedAlbums.forEach((item) => (item.views = 0));
-        state.mostVisitedAlbums = slicedAlbums;
-
-        return slicedAlbums;
-      } else {
-        const sortedAlbums = state.mostVisitedAlbums.sort(
-          (albumA, albumB) =>
-            albumB.views - albumA.views ||
-            albumA.title.localeCompare(albumB.title)
-        );
-
-        state.mostVisitedAlbums = sortedAlbums.slice(0, 5);
-
-        return state.mostVisitedAlbums;
-      }
+      );
+      state.mostVisitedAlbums = sortedAlbums.slice(0, 5);
+      return state.mostVisitedAlbums;
     },
   },
   mutations: {
@@ -104,10 +80,10 @@ export default new Vuex.Store({
     async loadUsers({ commit }) {
       this.state.loadingMostVisitedUsersCard = true;
       const response = await PlaceholderService.GetUsersPlaceholder();
+      // esto es solo para probar de hacer un retardo dentro de las actions
       setTimeout(() => {
         commit("SET_Users", response.data);
-      }, 2000);
-      // commit("SET_Users", response.data);
+      }, 1000);
     },
     async loadAlbums({ commit }) {
       this.state.loadingMostVisitedAlbumsCard = true;
@@ -116,25 +92,18 @@ export default new Vuex.Store({
     },
     async loadPictures({ commit }) {
       this.state.loadingPictures = true;
-
       const response = await PlaceholderService.GetPicturesPlaceholder();
       commit("SET_Pictures", response.data);
     },
     userViewed(e, user) {
-      console.log("userViewed action");
-      console.log(e);
-      // console.log(user);
-      // console.log(this.state.mostVisitedUsers);
       const viewed = this.state.mostVisitedUsers.findIndex(
         (item) => item.id === user.id
       );
-      // console.log(viewed);
       if (viewed === -1) {
         user.views = 1;
         this.state.mostVisitedUsers.push(user);
-        console.log("update con el push");
       } else {
-        let userViewed = this.state.mostVisitedUsers.find(
+        const userViewed = this.state.mostVisitedUsers.find(
           (item) => item.id === user.id
         );
         userViewed.views++;
@@ -142,14 +111,9 @@ export default new Vuex.Store({
           (userA, userB) =>
             userB.views - userA.views || userA.name.localeCompare(userB.name)
         );
-        console.log("por aqui no actualiza verdad? ahora si!");
       }
     },
     albumViewed(e, album) {
-      console.log("albumViewed action");
-      console.log(e);
-      console.log(album);
-      console.log(this.state.mostVisitedAlbums);
       const viewed = this.state.mostVisitedAlbums.findIndex(
         (item) => item.id === album.id
       );

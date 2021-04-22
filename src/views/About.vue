@@ -4,7 +4,7 @@
     <v-row class="my-4" justify="center">
       <v-col class="my-4" cols="auto">
         <v-img src="./../assets/vue-js-1.svg"></v-img>
-        <h3 class="mt-2 text-center">Vue.js 2.6</h3>
+        <h3 class="mt-2 text-center">Vue.js 2.6.11</h3>
       </v-col>
       <v-col justify="center" class="my-4 mx-4" cols="auto"
         ><v-img src="./../assets/vuetify.svg" />

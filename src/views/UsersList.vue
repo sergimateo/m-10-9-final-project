@@ -2,6 +2,7 @@
   <v-row justify="center">
     <v-col v-for="item in users" :key="item.id" cols="auto">
       <v-card
+        shaped
         class="d-flex flex-column mx-auto pb-1 align-content-center"
         elevation="3"
         width="340"
@@ -27,25 +28,24 @@
 </template>
 
 <style scoped>
-/* no hace faltam pero por si llegase un nombre de usuario demasiado
+/* no hace falta, pero por si llegase un nombre de usuario demasiado
  largo, hacerle un word-break */
 .user-title {
   word-break: normal;
-
   text-align: center;
 }
 </style>
 
 <script>
-import { mapState } from "vuex";
+import { mapGetters } from "vuex";
 import router from "../router";
 
 export default {
   name: "UsersList",
 
   computed: {
-    ...mapState({
-      users: (state) => state.users,
+    ...mapGetters({
+      users: "usersGetter",
     }),
   },
   methods: {
@@ -62,9 +62,7 @@ export default {
       });
     },
   },
-  // mounted() {
-  //   this.$store.dispatch("loadUsers");
-  // },
+
   data() {
     return {
       title: "Users",

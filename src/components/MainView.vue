@@ -8,7 +8,8 @@
       </v-col>
 
       <v-col class="mt-5" cols="12">
-        <!-- estas 2 tarjetas podrian ser un componente en vez de repetir el codigo 2 veces.... -->
+        <!-- estas 2 tarjetas podrian ser un componente
+         en vez de repetir el codigo 2 veces, se podria refactorizar... -->
         <v-row justify="center">
           <v-col cols="auto">
             <v-card
@@ -23,7 +24,6 @@
               <v-card-text class="secondary text-center font-weight-bold title"
                 >Most Visited Users</v-card-text
               >
-
               <v-card-text v-for="item in users" :key="item.id" class="py-1">
                 <strong>{{ item.name }}: {{ item.views }}</strong>
               </v-card-text>
@@ -41,8 +41,6 @@
               <v-card-text class="secondary text-center font-weight-bold title"
                 >Most Visited Albums</v-card-text
               >
-
-              <!-- <v-divider class="mx-4"></v-divider> -->
               <v-card-text v-for="item in albums" :key="item.id" class="py-1">
                 <strong>{{ item.title }}: {{ item.views }} </strong>
               </v-card-text>
@@ -59,10 +57,6 @@ import { mapGetters } from "vuex";
 export default {
   name: "MainView",
   computed: {
-    // ...mapState({
-    // users: (state) => state.mostVisitedUsers,
-    // albums: (state) => state.mostVisitedAlbums,
-    // }),
     ...mapGetters({
       users: "mostVisitedUsersGetter",
       albums: "mostVisitedAlbumsGetter",
@@ -77,7 +71,7 @@ export default {
   },
 
   data: () => ({
-    loading: true,
+    loading: false,
   }),
 };
 </script>
