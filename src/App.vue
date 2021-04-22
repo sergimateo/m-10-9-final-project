@@ -1,56 +1,40 @@
 <template>
   <v-app>
-    <v-app-bar app color="primary" dark>
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
-
-    <v-main>
-      <HelloWorld />
+    <AppToolbar></AppToolbar>
+    <v-main aria-haspopup="">
+      <!-- La transicion esta 100% reciclada del
+      formulario Vue de los lagartos de V. Con AnimateCSS y listo calisto.
+      No me he estado nada de tiempo en hacer nuevas animaciones, transiciones etc -->
+      <v-container v-show="true" fluid>
+        <transition
+          appear
+          name="container-animation"
+          enter-active-class="animate__animated animate__fadeIn animate__fast"
+          leave-active-class="animate__animated animate__fadeOut"
+          mode="out-in"
+        >
+          <router-view></router-view>
+        </transition>
+      </v-container>
     </v-main>
+    <v-footer class="primary justify-center" app>
+      <div>Made with</div>
+      <v-icon class="px-1" color="secondary">mdi-heart</v-icon>
+      <div>by SMC Designs</div>
+    </v-footer>
   </v-app>
 </template>
+<style>
+html {
+  overflow-y: auto;
+}
+</style>
 
 <script>
-import HelloWorld from "./components/HelloWorld";
+import AppToolbar from "./components/AppToolbar.vue";
 
 export default {
   name: "App",
-
-  components: {
-    HelloWorld,
-  },
-
-  data: () => ({
-    //
-  }),
+  components: { AppToolbar },
 };
 </script>

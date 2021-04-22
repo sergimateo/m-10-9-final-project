@@ -13,11 +13,53 @@ const routes = [
   {
     path: "/about",
     name: "About",
-
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
+  },
+  //los paths de /users y /albums llevan rutas anidadas
+  {
+    path: "/users",
+    component: () =>
+      import(/* webpackChunkName: "users" */ "../views/Users.vue"),
+    children: [
+      {
+        path: "",
+        name: "UsersList",
+        component: () =>
+          import(/* webpackChunkName: "userslist" */ "../views/UsersList.vue"),
+      },
+      {
+        path: ":username",
+        name: "UserDetails",
+        component: () =>
+          import(
+            /* webpackChunkName: "userdetails" */ "../views/UserDetails.vue"
+          ),
+      },
+    ],
+  },
+  {
+    path: "/albums",
+    component: () =>
+      import(/* webpackChunkName: "albums" */ "../views/Albums.vue"),
+    children: [
+      {
+        path: "",
+        name: "AlbumsList",
+        component: () =>
+          import(
+            /* webpackChunkName: "albumslist" */ "../views/AlbumsList.vue"
+          ),
+      },
+      {
+        path: ":albumtitle",
+        name: "AlbumDetails",
+        component: () =>
+          import(
+            /* webpackChunkName: "albumdetails" */ "../views/AlbumDetails.vue"
+          ),
+      },
+    ],
   },
 ];
 
